@@ -11,6 +11,7 @@ import SiteFooter from '../components/SiteFooter';
 import WelcomeSection from '../components/WelcomeSection';
 import FeaturesSection from '../components/FeaturesSection';
 import LicenseAndAttributionSection from '../components/LicenseAndAttributionSection';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export default function HomePage() {
     return (
@@ -40,27 +41,26 @@ export default function HomePage() {
                             width: { xs: 'auto', sm: 320, md: 400 }, // Allow auto width for aspect ratio
                             maxWidth: '100%', // Ensure it doesn't overflow container
                             objectFit: 'contain',
-                             border: 3, // Border might not be needed if logo has its own whitespace
-                             borderColor: 'primary.main',
-                             boxShadow: 5, // Shadow might be too much on a non-circular logo image
+                            border: 3, // Border might not be needed if logo has its own whitespace
+                            borderColor: 'primary.main',
+                            boxShadow: 5, // Shadow might be too much on a non-circular logo image
                         }}
                     />
                     <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>
-                        Swords, Sorcery & Exploration
+                        Exploration, Fantasy, Sorcery & Swords
                     </Typography>
                     <Typography variant="h6" component="p" sx={{ color: 'text.secondary', mb: 4, maxWidth: '700px', mx: 'auto' }}>
                         A bunch of stuff that&#39;s compliant with the  Daggerheart system. Explore rules, create characters, and dive into lore & stories.
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', gap: 2 }}>
-                        {/*<Button variant="contained" color="primary" size="large" href="#explore-srd">
-                            Explore the SRD
+                        <Button variant="contained" color="primary" size="large" href="/classes/Bard">
+                            Explore Classes
                         </Button>
+                        {/* You can add another button here if needed, for example:
                         <Button variant="outlined" color="primary" size="large" href="#character-creation">
                             Character Creation
-                        </Button>*/}
-                        <Button variant="contained" color="primary" size="large" href="#explore-srd">
-                            Under Construction
                         </Button>
+                        */}
                     </Box>
                 </Container>
             </Box>
@@ -70,6 +70,7 @@ export default function HomePage() {
             <LicenseAndAttributionSection />
 
             <SiteFooter />
+            <GoogleAnalytics gaId={"G-ZWF7H100PF"}/>
         </>
     );
 }

@@ -1,3 +1,4 @@
+// This file defines and provides the Material UI theme to the application.
 'use client';
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -33,11 +34,12 @@ const theme = createTheme({
         h1: { fontWeight: 700, color: '#212121' },
         h2: { fontWeight: 700, color: '#212121' },
         h3: { fontWeight: 600, color: '#212121' },
-        h4: { fontWeight: 700, color: '#212121' },
+        h4: { fontWeight: 700, color: '#212121' }, // Used for Page Titles
         h5: { fontWeight: 700, color: '#212121' }, // Used for Site Title in Header
-        h6: { fontWeight: 600, color: '#212121' },
+        h6: { fontWeight: 600, color: '#212121' }, // Used for Accordion Summaries
         body1: { color: '#212121' }, // Main body text
         body2: { color: '#616161' }, // Secondary body text (e.g., descriptions)
+        caption: { color: '#616161'},
     },
     components: {
         MuiPaper: {
@@ -87,6 +89,54 @@ const theme = createTheme({
                 root: {
                     backgroundColor: '#f7f9fc',
                     boxShadow: '0 2px 4px -1px rgba(0,0,0,0.10)'
+                }
+            }
+        },
+        MuiAccordion: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'background.paper', // Use paper color for accordions
+                    '&:before': {
+                        display: 'none', // Remove default top border
+                    },
+                    '&$expanded': {
+                        margin: 'auto',
+                    },
+                },
+            },
+        },
+        MuiAccordionSummary: {
+            styleOverrides: {
+                root: {
+                    // backgroundColor: 'rgba(0, 0, 0, .03)', // Slightly different background for summary
+                    borderBottom: '1px solid rgba(0, 0, 0, .125)',
+                    marginBottom: -1,
+                    minHeight: 56,
+                    '&$expanded': {
+                        minHeight: 56,
+                    },
+                },
+                content: {
+                    '&$expanded': {
+                        margin: '12px 0',
+                    },
+                },
+            },
+        },
+        MuiAccordionDetails: {
+            styleOverrides: {
+                root: {
+                    paddingTop: '16px',
+                    paddingBottom: '16px',
+                    paddingLeft: '16px',
+                    paddingRight: '16px',
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    margin: '4px',
                 }
             }
         }
