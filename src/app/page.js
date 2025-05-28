@@ -20,7 +20,7 @@ export default function HomePage() {
 
             <Box
                 sx={{
-                    backgroundColor: 'background.paper',
+                    backgroundColor: 'background.paper', // Ensure this uses theme.palette.background.paper
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     py: { xs: 8, md: 12 },
@@ -31,19 +31,19 @@ export default function HomePage() {
                     {/* Site Logo */}
                     <Box
                         component="img"
-                        src="/Ki-Great-Gaming-Logo-Large.png"
+                        src="/Ki-Great-Gaming-Logo-Large.png" // Make sure this path is correct from the public folder
                         alt="Ki Great Gaming Logo"
                         sx={{
                             mx: 'auto',
                             mb: 4,
-                            borderRadius: '50%', // Removed as logo is not circular
+                            // borderRadius: '50%', // Removed as logo is not circular
                             height: { xs: 120, md: 160 },
                             width: { xs: 'auto', sm: 320, md: 400 }, // Allow auto width for aspect ratio
                             maxWidth: '100%', // Ensure it doesn't overflow container
                             objectFit: 'contain',
-                            border: 3, // Border might not be needed if logo has its own whitespace
-                            borderColor: 'primary.main',
-                            boxShadow: 5, // Shadow might be too much on a non-circular logo image
+                            // border: 3, // Border might not be needed if logo has its own whitespace
+                            // borderColor: 'primary.main',
+                            // boxShadow: 5, // Shadow might be too much on a non-circular logo image
                         }}
                     />
                     <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>
@@ -56,11 +56,9 @@ export default function HomePage() {
                         <Button variant="contained" color="primary" size="large" href="/classes/Bard">
                             Explore Classes
                         </Button>
-                        {/* You can add another button here if needed, for example:
-                        <Button variant="outlined" color="primary" size="large" href="#character-creation">
-                            Character Creation
+                        <Button variant="outlined" color="primary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
+                            Explore Ancestries
                         </Button>
-                        */}
                     </Box>
                 </Container>
             </Box>

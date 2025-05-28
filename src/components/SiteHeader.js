@@ -1,4 +1,7 @@
+'use client'; // Required for usePathname hook
+
 import React from 'react';
+import { usePathname } from 'next/navigation'; // Import usePathname
 import {
     AppBar,
     Toolbar,
@@ -6,9 +9,45 @@ import {
     Container,
     Box,
     Link as MuiLink,
+    useTheme, // Import useTheme to access theme palette for active styles
 } from '@mui/material';
 
 export default function SiteHeader() {
+    const pathname = usePathname();
+    const theme = useTheme();
+
+    const commonLinkStyles = {
+        fontWeight: 'medium',
+        fontSize: '0.9375rem', // 15px
+        textDecoration: 'none',
+        padding: '8px 16px',
+        borderRadius: '4px', // For hover background effect consistency
+        transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-bottom 0.2s ease-in-out',
+        borderBottom: '2px solid transparent', // Placeholder for active state
+        '&:hover': {
+            color: theme.palette.secondary.main, // Darker blue on hover
+            backgroundColor: theme.palette.action.hover, // Subtle background on hover
+            textDecoration: 'none',
+        },
+    };
+
+    const activeLinkStyles = {
+        color: theme.palette.text.primary, // Use a more prominent color for active state
+        fontWeight: 'bold',
+        borderBottom: `2px solid ${theme.palette.primary.main}`,
+        backgroundColor: theme.palette.action.selected, // Or a slightly different hover/selected background
+    };
+
+    // Check if paths exist to avoid errors if theme.palette.action.selected is not defined
+    const selectedBackgroundColor = theme.palette.action?.selected || theme.palette.action?.hover || 'transparent';
+
+
+    const navLinks = [
+        { href: '/classes/Bard', label: 'Classes', activeCheck: () => pathname.startsWith('/classes') },
+        { href: '/ancestries/Human', label: 'Ancestries', activeCheck: () => pathname.startsWith('/ancestries') },
+        // Add more links here if needed
+    ];
+
     return (
         <AppBar position="sticky" component="header">
             <Container maxWidth="lg">
@@ -22,7 +61,7 @@ export default function SiteHeader() {
                                 height: { xs: 30, sm: 36 },
                                 width: { xs: 30, sm: 36 },
                                 objectFit: 'contain',
-                                mr: 1, // Add some margin to the right of the logo
+                                mr: 1,
                             }}
                         />
                         <Typography variant="h5" component="span" sx={{ fontWeight: 'bold', color: 'text.primary' }}>
@@ -30,46 +69,30 @@ export default function SiteHeader() {
                         </Typography>
                     </Box>
 
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}> {/* Adjusted gap for potentially more items */}
-                        <MuiLink
-                            href="/classes/Bard"
-                            sx={{
-                                color: 'primary.main', // Use the main primary color (blue)
-                                fontWeight: 'medium',   // Or 'bold'
-                                fontSize: '0.9375rem', // Adjust size to be harmonious with h5, typically 16px is body1, h5 is 24px. 15px here.
-                                textDecoration: 'none',
-                                padding: '8px 16px',    // Standard padding for clickable areas
-                                borderRadius: '4px',    // Consistent with other themed components like buttons
-                                transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
-                                '&:hover': {
-                                    color: 'secondary.main', // Darker blue on hover for the text
-                                    backgroundColor: 'action.hover', // Use theme's subtle background hover
-                                    textDecoration: 'none', // Keep underline off, or add 'underline' if preferred for nav links
-                                },
-                            }}
-                        >
-                            Classes
-                        </MuiLink>
-                        {/* You can add more links here following the same pattern if needed:
-                        <MuiLink
-                            href="#another-link"
-                            sx={{
-                                color: 'primary.main',
-                                fontWeight: 'medium',
-                                fontSize: '0.9375rem',
-                                textDecoration: 'none',
-                                padding: '8px 16px',
-                                borderRadius: '4px',
-                                transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
-                                '&:hover': {
-                                    color: 'secondary.main',
-                                    backgroundColor: 'action.hover',
-                                },
-                            }}
-                        >
-                            Another Link
-                        </MuiLink>
-                        */}
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+                        {navLinks.map((link) => {
+                            const isActive = link.activeCheck();
+                            return (
+                                <MuiLink
+                                    key={link.label}
+                                    href={link.href}
+                                    sx={{
+                                        ...commonLinkStyles,
+                                        color: isActive ? theme.palette.text.primary : theme.palette.primary.main,
+                                        fontWeight: isActive ? 'bold' : 'medium',
+                                        borderBottomColor: isActive ? theme.palette.primary.main : 'transparent',
+                                        '&:hover': {
+                                            ...commonLinkStyles['&:hover'], // inherit common hover
+                                            // Optionally, slightly different hover for active to maintain prominence
+                                            // color: isActive ? theme.palette.primary.dark : theme.palette.secondary.main,
+                                        },
+                                        ...(isActive && { backgroundColor: selectedBackgroundColor })
+                                    }}
+                                >
+                                    {link.label}
+                                </MuiLink>
+                            );
+                        })}
                     </Box>
                 </Toolbar>
             </Container>
