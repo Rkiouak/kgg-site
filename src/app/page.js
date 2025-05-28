@@ -56,8 +56,11 @@ export default function HomePage() {
                         <Button variant="contained" color="primary" size="large" href="/classes/Bard">
                             Explore Classes
                         </Button>
-                        <Button variant="outlined" color="primary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
+                        <Button variant="contained" color="primary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
                             Explore Ancestries
+                        </Button>
+                        <Button variant="contained" color="primary" size="large" href="/communities/Highborne"> {/* Added Communities button */}
+                            Explore Communities
                         </Button>
                     </Box>
                 </Container>

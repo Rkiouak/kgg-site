@@ -31,13 +31,6 @@ export default function SiteHeader() {
         },
     };
 
-    const activeLinkStyles = {
-        color: theme.palette.text.primary, // Use a more prominent color for active state
-        fontWeight: 'bold',
-        borderBottom: `2px solid ${theme.palette.primary.main}`,
-        backgroundColor: theme.palette.action.selected, // Or a slightly different hover/selected background
-    };
-
     // Check if paths exist to avoid errors if theme.palette.action.selected is not defined
     const selectedBackgroundColor = theme.palette.action?.selected || theme.palette.action?.hover || 'transparent';
 
@@ -45,6 +38,7 @@ export default function SiteHeader() {
     const navLinks = [
         { href: '/classes/Bard', label: 'Classes', activeCheck: () => pathname.startsWith('/classes') },
         { href: '/ancestries/Human', label: 'Ancestries', activeCheck: () => pathname.startsWith('/ancestries') },
+        { href: '/communities/Highborne', label: 'Communities', activeCheck: () => pathname.startsWith('/communities') }, // Added Communities link
         // Add more links here if needed
     ];
 
@@ -82,9 +76,7 @@ export default function SiteHeader() {
                                         fontWeight: isActive ? 'bold' : 'medium',
                                         borderBottomColor: isActive ? theme.palette.primary.main : 'transparent',
                                         '&:hover': {
-                                            ...commonLinkStyles['&:hover'], // inherit common hover
-                                            // Optionally, slightly different hover for active to maintain prominence
-                                            // color: isActive ? theme.palette.primary.dark : theme.palette.secondary.main,
+                                            ...commonLinkStyles['&:hover'],
                                         },
                                         ...(isActive && { backgroundColor: selectedBackgroundColor })
                                     }}
