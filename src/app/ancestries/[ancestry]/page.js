@@ -65,11 +65,11 @@ export async function generateMetadata({ params }) {
 export default async function AncestryDetailPage({ params }) {
     // params.ancestry comes from the URL and is URL-encoded (e.g., "Mixed%20Ancestry")
     const { ancestry: encodedAncestryNameParam } = params;
-
+    const ancestryNameParam = decodeURIComponent(encodedAncestryNameParam);
     const allAncestries = await getAllAncestriesForStaticGeneration();
 
     // Find the specific ancestry data. Match against the encoded name.
-    const ancestryData = allAncestries.find(a => encodeURIComponent(a.name) === encodedAncestryNameParam);
+    const ancestryData = allAncestries.find(a => encodeURIComponent(a.name) === ancestryNameParam);
 
     if (!ancestryData) {
         const decodedParamForLog = decodeURIComponent(encodedAncestryNameParam);

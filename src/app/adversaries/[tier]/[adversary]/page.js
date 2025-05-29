@@ -90,11 +90,11 @@ export async function generateMetadata({ params }) {
 // Page Server Component
 export default async function AdversaryDetailPage({ params }) {
     const { tier, adversary: encodedAdversaryNameParam } = params;
-
+    const adversaryNameParam = decodeURIComponent(encodedAdversaryNameParam);
     const allAdversaries = await getAllAdversariesForStaticGeneration();
 
     const adversaryData = allAdversaries.find(
-        adv => String(adv.tier) === tier && encodeURIComponent(adv.name) === encodedAdversaryNameParam
+        adv => String(adv.tier) === tier && encodeURIComponent(adv.name) === adversaryNameParam
     );
 
     if (!adversaryData) {
