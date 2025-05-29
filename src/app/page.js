@@ -71,8 +71,14 @@ export default function HomePage() {
                         <Button variant="outlined" color="secondary" size="large" href="/campaign-frames">
                             Explore Campaign Frames
                         </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/campaign-frames">
+                        <Button variant="outlined" color="secondary" size="large" href="/domains">
                             Explore Domains
+                        </Button>
+                        <Button variant="outlined" color="secondary" size="large" href="/weapons">
+                            Explore Weapons
+                        </Button>
+                        <Button variant="outlined" color="secondary" size="large" href="/armors">
+                            Explore Armors
                         </Button>
                     </Box>
                 </Container>

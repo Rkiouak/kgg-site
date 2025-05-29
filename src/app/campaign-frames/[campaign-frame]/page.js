@@ -50,7 +50,8 @@ export async function generateStaticParams() {
     }).filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     // Param key matches the folder name: [campaign-frame]
     const encodedName = params["campaign-frame"];
     const decodedCampaignFrameName = encodedName ? decodeURIComponent(encodedName) : "Campaign Frame";
@@ -60,7 +61,8 @@ export async function generateMetadata({ params }) {
     };
 }
 
-export default async function CampaignFrameDetailPage({ params }) {
+export default async function CampaignFrameDetailPage(props) {
+    const params = await props.params;
     // Param key matches the folder name: [campaign-frame]
     const encodedCampaignFrameNameParam = params["campaign-frame"];
 

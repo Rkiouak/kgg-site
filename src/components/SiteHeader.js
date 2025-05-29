@@ -40,7 +40,11 @@ export default function SiteHeader() {
         { href: '/domains', label: 'Domains', activeCheck: () => pathname.startsWith('/domains') },
         { href: '/adversaries', label: 'Adversaries', activeCheck: () => pathname.startsWith('/adversaries') },
         { href: '/environments', label: 'Environments', activeCheck: () => pathname.startsWith('/environments') },
-        { href: '/campaign-frames', label: 'Campaign Frames', activeCheck: () => pathname.startsWith('/campaign-frames') }
+        { href: '/campaign-frames', label: 'Campaign Frames', activeCheck: () => pathname.startsWith('/campaign-frames') },
+        { href: '/weapons', label: 'Weapons', activeCheck: () => pathname.startsWith('/weapons') },
+        { href: '/armors', label: 'Armors', activeCheck: () => pathname.startsWith('/armors') },
+
+
     ];
 
     return (
