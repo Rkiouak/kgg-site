@@ -65,6 +65,9 @@ export default function HomePage() {
                         <Button variant="outlined" color="secondary" size="large" href="/adversaries"> {/* Added Adversaries button */}
                             Explore Adversaries
                         </Button>
+                        <Button variant="outlined" color="secondary" size="large" href="/environments">
+                            Explore Environments
+                        </Button>
                     </Box>
                 </Container>
             </Box>

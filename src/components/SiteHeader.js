@@ -37,7 +37,8 @@ export default function SiteHeader() {
         { href: '/classes/Bard', label: 'Classes', activeCheck: () => pathname.startsWith('/classes') },
         { href: '/ancestries/Human', label: 'Ancestries', activeCheck: () => pathname.startsWith('/ancestries') },
         { href: '/communities/Highborne', label: 'Communities', activeCheck: () => pathname.startsWith('/communities') },
-        { href: '/adversaries', label: 'Adversaries', activeCheck: () => pathname.startsWith('/adversaries') }, // Added Adversaries link
+        { href: '/adversaries', label: 'Adversaries', activeCheck: () => pathname.startsWith('/adversaries') },
+        { href: '/environments', label: 'Environments', activeCheck: () => pathname.startsWith('/environments') }
     ];
 
     return (
