@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // Import NextLink
 import {
     Typography,
     Box,
@@ -14,10 +15,11 @@ import {
     Grid,
     List,
     ListItem,
-    ListItemText
+    ListItemText,
+    ListItemButton // Added for clickable list items
 } from '@mui/material';
 
-// Helper for lists of strings (e.g., impulses, potential adversaries)
+// Helper for lists of strings (e.g., impulses) - can remain as is if used elsewhere for non-links
 const StringListDisplay = ({ items, title, useChips = false }) => {
     if (!items || items.length === 0) {
         return null;
@@ -38,7 +40,7 @@ const StringListDisplay = ({ items, title, useChips = false }) => {
     );
 };
 
-// Helper for Environment Features
+// Helper for Environment Features (remains the same as previous version)
 const EnvironmentFeaturesDisplay = ({ features }) => {
     if (!features || Object.keys(features).length === 0) {
         return null;
@@ -84,18 +86,11 @@ export default function EnvironmentDetailLayout({ allEnvironments, environmentDa
 
     const handleTierTabChange = (event, newTier) => {
         setSelectedFilterTier(newTier);
-        // Navigate to the first environment in the new tier
         const firstEnvInNewTier = allEnvironments
             .filter(env => env.tier === newTier)
             .sort((a, b) => a.name.localeCompare(b.name))[0];
         if (firstEnvInNewTier) {
             router.push(`/environments/${newTier}/${encodeURIComponent(firstEnvInNewTier.name)}`);
-        } else {
-            // If no env in tier, ideally the page would show a message or redirect to /environments
-            // For now, this push might lead to a 404 if not handled, or current page shows no data for new tier
-            // To prevent errors, perhaps push to the general environments page if no specific env exists.
-            // Or simply update the filter and let the user click if list is empty.
-            // router.push(`/environments`); // Fallback example
         }
     };
 
@@ -163,7 +158,7 @@ export default function EnvironmentDetailLayout({ allEnvironments, environmentDa
                         variant="scrollable"
                         scrollButtons="auto"
                         aria-label="Environments by selected tier"
-                        indicatorColor="secondary" // Using secondary for this level of tabs
+                        indicatorColor="secondary"
                         textColor="secondary"
                     >
                         {environmentsForSelectedTier.map((env) => (
@@ -205,7 +200,27 @@ export default function EnvironmentDetailLayout({ allEnvironments, environmentDa
                         </Grid>
                     </Grid>
 
-                    <StringListDisplay items={environmentData.potentialAdversaries} title="Potential Adversaries" />
+                    {environmentData.potentialAdversaries && environmentData.potentialAdversaries.length > 0 && (
+                        <Box sx={{ mt: 2 }}>
+                            <Typography variant="h6" component="h3" sx={{ fontWeight: 'medium', mb: 1 }}>Potential Adversaries</Typography>
+                            <List dense disablePadding>
+                                {environmentData.potentialAdversaries.map((advName) => (
+                                    <ListItem key={advName} disablePadding sx={{mb: 0.5}}>
+                                        <ListItemButton
+                                            component={Link}
+                                            href={`/adversaries/${environmentData.tier}/${encodeURIComponent(advName)}`}
+                                            sx={{ borderRadius: 1 }}
+                                        >
+                                            <ListItemText
+                                                primary={advName}
+                                                primaryTypographyProps={{color: 'primary.main'}} // Style as a link
+                                            />
+                                        </ListItemButton>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Box>
+                    )}
 
                     <EnvironmentFeaturesDisplay features={environmentData.environmentFeatures} />
 

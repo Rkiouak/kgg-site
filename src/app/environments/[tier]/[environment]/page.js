@@ -46,7 +46,7 @@ export async function generateStaticParams() {
         }
         return {
             tier: String(env.tier),
-            environment: encodeURIComponent(env.name),
+            environment: env.name,
         };
     }).filter(Boolean);
 }

@@ -47,7 +47,7 @@ export async function generateStaticParams() {
             return null;
         }
         return {
-            ancestry: encodeURIComponent(anc.name), // `ancestry` here matches the folder name [ancestry]
+            ancestry: anc.name, // `ancestry` here matches the folder name [ancestry]
         };
     }).filter(Boolean);
 }
