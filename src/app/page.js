@@ -53,14 +53,17 @@ export default function HomePage() {
                         A bunch of stuff that&#39;s compliant with the  Daggerheart system. Explore rules, create characters, and dive into lore & stories.
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', gap: 2 }}>
-                        <Button variant="contained" color="primary" size="large" href="/classes/Bard">
+                        <Button variant="outlined" color="secondary" size="large" href="/classes/Bard">
                             Explore Classes
                         </Button>
-                        <Button variant="contained" color="primary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
+                        <Button variant="outlined" color="secondary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
                             Explore Ancestries
                         </Button>
-                        <Button variant="contained" color="primary" size="large" href="/communities/Highborne"> {/* Added Communities button */}
+                        <Button variant="outlined" color="secondary" size="large" href="/communities/Highborne"> {/* Added Communities button */}
                             Explore Communities
+                        </Button>
+                        <Button variant="outlined" color="secondary" size="large" href="/adversaries"> {/* Added Adversaries button */}
+                            Explore Adversaries
                         </Button>
                     </Box>
                 </Container>

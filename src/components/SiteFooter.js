@@ -27,7 +27,7 @@ export default function SiteFooter() {
                     Daggerheart™ and all related Daggerheart marks and logos are trademarks of Critical Role, LLC. Daggerheart System Reference Document 1.0 © Critical Role, LLC.
                 </Typography>
                 <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    Last Updated: 2025-05-28
+                    Last Updated: 2025-05-28. You can contact the site author at <a href={"mailto:mrkiouak@gmail.com"}>mrkiouak@gmail.com</a>
                 </Typography>
             </Container>
         </Box>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { Container } from '@mui/material'; // Removed Box, CircularProgress, Alert as they are handled in ClassDetailLayout or not needed here
+import { Container } from '@mui/material'; // Only Container needed from MUI here
 import SiteHeader from '../../../components/SiteHeader';
 import SiteFooter from '../../../components/SiteFooter';
 import ClassDetailLayout from '../../../components/ClassDetailLayout';
+import DruidBeastformOptions from '../../../components/DruidBeastformOptions'; // Import the new component
 
-// Fetch all classes (this will be cached by Next.js during build for SSG)
+// Assume getAllClassesForStaticGeneration and getClassData are defined in this file or imported correctly
+// For brevity, their definitions are omitted here but should be present as before.
 async function getAllClassesForStaticGeneration() {
     const apiUrl = process.env.NEXT_PUBLIC_BASE_URL+'/api/dh/classes';
     try {
@@ -58,18 +60,22 @@ export async function generateMetadata({ params }) {
     };
 }
 
-async function getClassData(className, allClasses) { // Pass allClasses to avoid re-fetching
-    const decodedClassName = decodeURIComponent(className);
+async function getClassData(classNameParam, allClasses) { // classNameParam is encoded
+    const decodedClassName = decodeURIComponent(classNameParam);
     return allClasses.find(c => c.name === decodedClassName);
 }
 
+// This default export is the Server Component for the page
 export default async function ClassDetailPage({ params }) {
-    const { class: classNameParam } = params;
-    const allClasses = await getAllClassesForStaticGeneration(); // Fetch all classes once
-    const classData = await getClassData(classNameParam, allClasses); // Find specific class
+    const { class: classNameParam } = params; // classNameParam is URL-encoded
+    const decodedClassName = decodeURIComponent(classNameParam); // Decode for display and conditional logic
+
+    const allClasses = await getAllClassesForStaticGeneration();
+    const classData = await getClassData(classNameParam, allClasses); // getClassData handles decoding
 
     if (!classData) {
-        console.warn(`Class data not found for param: ${classNameParam} (decoded: ${decodeURIComponent(classNameParam)})`);
+        // This console.warn should use decodedClassName for better logging if classNameParam is encoded
+        console.warn(`Class data not found for param: ${classNameParam} (decoded: ${decodedClassName})`);
         notFound();
     }
 
@@ -77,8 +83,10 @@ export default async function ClassDetailPage({ params }) {
         <>
             <SiteHeader />
             <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
-                {/* Pass allClasses to ClassDetailLayout */}
+                {/* ClassDetailLayout is a client component handling main class details & subclass tabs */}
                 <ClassDetailLayout classData={classData} allClasses={allClasses} />
+
+                {decodedClassName === 'Druid' && <DruidBeastformOptions />}
             </Container>
             <SiteFooter />
         </>

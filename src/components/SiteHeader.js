@@ -1,7 +1,7 @@
-'use client'; // Required for usePathname hook
+'use client';
 
 import React from 'react';
-import { usePathname } from 'next/navigation'; // Import usePathname
+import { usePathname } from 'next/navigation';
 import {
     AppBar,
     Toolbar,
@@ -9,7 +9,7 @@ import {
     Container,
     Box,
     Link as MuiLink,
-    useTheme, // Import useTheme to access theme palette for active styles
+    useTheme,
 } from '@mui/material';
 
 export default function SiteHeader() {
@@ -18,28 +18,26 @@ export default function SiteHeader() {
 
     const commonLinkStyles = {
         fontWeight: 'medium',
-        fontSize: '0.9375rem', // 15px
+        fontSize: '0.9375rem',
         textDecoration: 'none',
         padding: '8px 16px',
-        borderRadius: '4px', // For hover background effect consistency
+        borderRadius: '4px',
         transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-bottom 0.2s ease-in-out',
-        borderBottom: '2px solid transparent', // Placeholder for active state
+        borderBottom: '2px solid transparent',
         '&:hover': {
-            color: theme.palette.secondary.main, // Darker blue on hover
-            backgroundColor: theme.palette.action.hover, // Subtle background on hover
+            color: theme.palette.secondary.main,
+            backgroundColor: theme.palette.action.hover,
             textDecoration: 'none',
         },
     };
 
-    // Check if paths exist to avoid errors if theme.palette.action.selected is not defined
     const selectedBackgroundColor = theme.palette.action?.selected || theme.palette.action?.hover || 'transparent';
-
 
     const navLinks = [
         { href: '/classes/Bard', label: 'Classes', activeCheck: () => pathname.startsWith('/classes') },
         { href: '/ancestries/Human', label: 'Ancestries', activeCheck: () => pathname.startsWith('/ancestries') },
-        { href: '/communities/Highborne', label: 'Communities', activeCheck: () => pathname.startsWith('/communities') }, // Added Communities link
-        // Add more links here if needed
+        { href: '/communities/Highborne', label: 'Communities', activeCheck: () => pathname.startsWith('/communities') },
+        { href: '/adversaries', label: 'Adversaries', activeCheck: () => pathname.startsWith('/adversaries') }, // Added Adversaries link
     ];
 
     return (
@@ -63,7 +61,7 @@ export default function SiteHeader() {
                         </Typography>
                     </Box>
 
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: {xs: 0.5, sm: 1} }}> {/* Adjusted gap */}
                         {navLinks.map((link) => {
                             const isActive = link.activeCheck();
                             return (
