@@ -4,6 +4,7 @@ import {
     Container,
     Box,
     Button,
+    Grid, // Added Grid
 } from '@mui/material';
 
 import SiteHeader from '../components/SiteHeader';
@@ -14,73 +15,70 @@ import LicenseAndAttributionSection from '../components/LicenseAndAttributionSec
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export default function HomePage() {
+    const exploreButtons = [
+        { href: "/classes/Bard", label: "Explore Classes" },
+        { href: "/ancestries/Human", label: "Explore Ancestries" },
+        { href: "/communities/Highborne", label: "Explore Communities" },
+        { href: "/domains", label: "Explore Domains" },
+        { href: "/adversaries", label: "Explore Adversaries" },
+        { href: "/environments", label: "Explore Environments" },
+        { href: "/campaign-frames", label: "Explore Campaign Frames" },
+        { href: "/weapons", label: "Explore Weapons" },
+        { href: "/armors", label: "Explore Armors" },
+        { href: "/consumables/Stride%20Potion", label: "Explore Consumables" },
+        { href: "/loot/Premium%20Bedroll", label: "Explore Loot" },
+    ];
+
     return (
         <>
             <SiteHeader />
 
             <Box
                 sx={{
-                    backgroundColor: 'background.paper', // Ensure this uses theme.palette.background.paper
+                    backgroundColor: 'background.paper',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    py: { xs: 8, md: 12 },
+                    py: { xs: 6, md: 10 }, // Adjusted padding
                     textAlign: 'center',
                 }}
             >
                 <Container maxWidth="md">
-                    {/* Site Logo */}
                     <Box
                         component="img"
-                        src="/Ki-Great-Gaming-Logo-Large.png" // Make sure this path is correct from the public folder
+                        src="/Ki-Great-Gaming-Logo-Large.png"
                         alt="Ki Great Gaming Logo"
                         sx={{
                             mx: 'auto',
                             mb: 4,
-                            // borderRadius: '50%', // Removed as logo is not circular
-                            height: { xs: 120, md: 160 },
-                            width: { xs: 'auto', sm: 320, md: 400 }, // Allow auto width for aspect ratio
-                            maxWidth: '100%', // Ensure it doesn't overflow container
+                            height: { xs: 100, md: 140 }, // Slightly adjusted
+                            width: 'auto',
+                            maxWidth: { xs: '80%', sm: 380, md: 450 }, // Adjusted max width
                             objectFit: 'contain',
-                            // border: 3, // Border might not be needed if logo has its own whitespace
-                            // borderColor: 'primary.main',
-                            // boxShadow: 5, // Shadow might be too much on a non-circular logo image
                         }}
                     />
                     <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>
                         Exploration, Fantasy, Sorcery & Swords
                     </Typography>
-                    <Typography variant="h6" component="p" sx={{ color: 'text.secondary', mb: 4, maxWidth: '700px', mx: 'auto' }}>
-                        A bunch of stuff that&#39;s compliant with the  Daggerheart system. Explore rules, create characters, and dive into lore & stories.
+                    <Typography variant="h6" component="p" sx={{ color: 'text.secondary', mb: 5, maxWidth: '700px', mx: 'auto' }}> {/* Increased bottom margin */}
+                        A bunch of stuff that&#39;s compliant with the Daggerheart system. Explore rules, create characters, and dive into lore & stories.
                     </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', gap: 2 }}>
-                        <Button variant="outlined" color="secondary" size="large" href="/classes/Bard">
-                            Explore Classes
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/ancestries/Human"> {/* Changed from contained to outlined for variety */}
-                            Explore Ancestries
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/communities/Highborne"> {/* Added Communities button */}
-                            Explore Communities
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/adversaries"> {/* Added Adversaries button */}
-                            Explore Adversaries
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/environments">
-                            Explore Environments
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/campaign-frames">
-                            Explore Campaign Frames
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/domains">
-                            Explore Domains
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/weapons">
-                            Explore Weapons
-                        </Button>
-                        <Button variant="outlined" color="secondary" size="large" href="/armors">
-                            Explore Armors
-                        </Button>
-                    </Box>
+
+                    {/* Grid for Buttons */}
+                    <Grid container spacing={2} justifyContent="center" alignItems="center">
+                        {exploreButtons.map((buttonInfo) => (
+                            <Grid item size={{xs:6, sm:4, md:3}} key={buttonInfo.href}> {/* Adjust column sizes as needed */}
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    size="large"
+                                    href={buttonInfo.href}
+                                    fullWidth // Make buttons take full width of their grid item
+                                >
+                                    {buttonInfo.label}
+                                </Button>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </Container>
             </Box>
 

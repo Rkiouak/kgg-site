@@ -67,7 +67,7 @@ export async function generateStaticParams() {
         }
         return {
             tier: String(arm.tier),
-            armor: encodeURIComponent(arm.name), // 'armor' matches folder name [armor]
+            armor: arm.name, // 'armor' matches folder name [armor]
         };
     }).filter(Boolean);
 }
