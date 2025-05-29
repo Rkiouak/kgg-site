@@ -52,7 +52,8 @@ export async function generateStaticParams() {
     }).filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     const decodedClassName = params.class ? decodeURIComponent(params.class) : "Class";
     return {
         title: `${decodedClassName} - Daggerheart Class | Ki Great Gaming`,
@@ -66,7 +67,8 @@ async function getClassData(classNameParam, allClasses) { // classNameParam is e
 }
 
 // This default export is the Server Component for the page
-export default async function ClassDetailPage({ params }) {
+export default async function ClassDetailPage(props) {
+    const params = await props.params;
     const { class: classNameParam } = params; // classNameParam is URL-encoded
     const decodedClassName = decodeURIComponent(classNameParam); // Decode for display and conditional logic
 

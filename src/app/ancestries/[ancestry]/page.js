@@ -52,7 +52,8 @@ export async function generateStaticParams() {
     }).filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     // params.ancestry is URL-encoded. Decode it for display purposes.
     const decodedAncestryName = params.ancestry ? decodeURIComponent(params.ancestry) : "Ancestry";
     return {
@@ -62,14 +63,15 @@ export async function generateMetadata({ params }) {
 }
 
 // This default export is the Server Component for the page
-export default async function AncestryDetailPage({ params }) {
+export default async function AncestryDetailPage(props) {
+    const params = await props.params;
     // params.ancestry comes from the URL and is URL-encoded (e.g., "Mixed%20Ancestry")
     const { ancestry: encodedAncestryNameParam } = params;
     const ancestryNameParam = decodeURIComponent(encodedAncestryNameParam);
     const allAncestries = await getAllAncestriesForStaticGeneration();
 
     // Find the specific ancestry data. Match against the encoded name.
-    const ancestryData = allAncestries.find(a => encodeURIComponent(a.name) === ancestryNameParam);
+    const ancestryData = allAncestries.find(a => a.name === ancestryNameParam);
 
     if (!ancestryData) {
         const decodedParamForLog = decodeURIComponent(encodedAncestryNameParam);

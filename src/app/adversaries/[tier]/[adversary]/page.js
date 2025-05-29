@@ -73,12 +73,13 @@ export async function generateStaticParams() {
         }
         return {
             tier: String(adv.tier),
-            adversary: encodeURIComponent(adv.name),
+            adversary: adv.name,
         };
     }).filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     const tier = params.tier;
     const decodedAdversaryName = params.adversary ? decodeURIComponent(params.adversary) : "Adversary";
     return {
@@ -88,13 +89,13 @@ export async function generateMetadata({ params }) {
 }
 
 // Page Server Component
-export default async function AdversaryDetailPage({ params }) {
+export default async function AdversaryDetailPage(props) {
+    const params = await props.params;
     const { tier, adversary: encodedAdversaryNameParam } = params;
-    const adversaryNameParam = decodeURIComponent(encodedAdversaryNameParam);
     const allAdversaries = await getAllAdversariesForStaticGeneration();
 
     const adversaryData = allAdversaries.find(
-        adv => String(adv.tier) === tier && encodeURIComponent(adv.name) === adversaryNameParam
+        adv => String(adv.tier) === tier && encodeURIComponent(adv.name) === encodedAdversaryNameParam
     );
 
     if (!adversaryData) {

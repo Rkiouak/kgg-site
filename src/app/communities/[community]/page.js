@@ -50,7 +50,8 @@ export async function generateStaticParams() {
     }).filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+    const params = await props.params;
     const decodedCommunityName = params.community ? decodeURIComponent(params.community) : "Community";
     return {
         title: `${decodedCommunityName} - Daggerheart Community | Ki Great Gaming`,
@@ -59,7 +60,8 @@ export async function generateMetadata({ params }) {
 }
 
 // Page Server Component
-export default async function CommunityDetailPage({ params }) {
+export default async function CommunityDetailPage(props) {
+    const params = await props.params;
     const { community: encodedCommunityNameParam } = params; // URL-encoded
 
     const allCommunities = await getAllCommunitiesForStaticGeneration();
