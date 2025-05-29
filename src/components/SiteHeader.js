@@ -37,6 +37,7 @@ export default function SiteHeader() {
         { href: '/classes/Bard', label: 'Classes', activeCheck: () => pathname.startsWith('/classes') },
         { href: '/ancestries/Human', label: 'Ancestries', activeCheck: () => pathname.startsWith('/ancestries') },
         { href: '/communities/Highborne', label: 'Communities', activeCheck: () => pathname.startsWith('/communities') },
+        { href: '/domains', label: 'Domains', activeCheck: () => pathname.startsWith('/domains') },
         { href: '/adversaries', label: 'Adversaries', activeCheck: () => pathname.startsWith('/adversaries') },
         { href: '/environments', label: 'Environments', activeCheck: () => pathname.startsWith('/environments') },
         { href: '/campaign-frames', label: 'Campaign Frames', activeCheck: () => pathname.startsWith('/campaign-frames') }

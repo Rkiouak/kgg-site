@@ -71,6 +71,9 @@ export default function HomePage() {
                         <Button variant="outlined" color="secondary" size="large" href="/campaign-frames">
                             Explore Campaign Frames
                         </Button>
+                        <Button variant="outlined" color="secondary" size="large" href="/campaign-frames">
+                            Explore Domains
+                        </Button>
                     </Box>
                 </Container>
             </Box>

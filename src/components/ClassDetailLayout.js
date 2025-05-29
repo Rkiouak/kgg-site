@@ -20,6 +20,7 @@ import {
     Alert,
     Grid, // Added Grid for layout
 } from '@mui/material';
+import Link from 'next/link'; // Import Link from Next.js
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Helper component to render features (remains the same)
@@ -138,8 +139,18 @@ export default function ClassDetailLayout({ classData, allClasses }) {
                             <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 2, mb: 3, textAlign: 'center' }}>
                                 <Box>
                                     <Typography variant="overline" display="block" color="text.secondary">Domains</Typography>
-                                    <Box>
-                                        {classData.domains.map(domain => <Chip key={domain} label={domain} color="primary" />)}
+                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, justifyContent: 'center' }}>
+                                        {classData.domains.map(domain => (
+                                            <Link href={`/domains/${encodeURIComponent(domain)}`} key={domain} passHref legacyBehavior>
+                                                <Chip
+                                                    component="a" // Makes the Chip behave like an anchor for NextLink
+                                                    label={domain}
+                                                    color="primary"
+                                                    clickable // MUI prop for visual feedback
+                                                    sx={{ '&:hover': { textDecoration: 'none' } }} // Prevent underline on chip if not desired
+                                                />
+                                            </Link>
+                                        ))}
                                     </Box>
                                 </Box>
                                 <Box>
